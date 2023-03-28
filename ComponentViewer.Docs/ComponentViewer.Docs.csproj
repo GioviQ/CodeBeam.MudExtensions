@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -12,12 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
-    <PackageReference Include="MudBlazor" Version="6.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
+    <PackageReference Include="MudBlazor" Version="6.1.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CodeBeam.MudExtensions\CodeBeam.MudExtensions.csproj" />
+    <ProjectReference Include="..\CodeBeam.MudBlazor.Extensions\CodeBeam.MudBlazor.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,4 +29,5 @@
 	<ItemGroup>
 		<EmbeddedResource Include="Pages/Examples/**" />
 	</ItemGroup>
+
 </Project>

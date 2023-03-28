@@ -3,7 +3,7 @@
 @if (HasExpansionPanel)
 {
     <MudExpansionPanel Text="@Title">
-        <MudCard Class="component-card mx-sm-2 my-8 pa-sm-2 example-card" Style="cursor: default" Elevation="4">
+        <MudCard Class="component-card mx-sm-2 my-8 pa-sm-2" Style="cursor: default" Elevation="4">
             <MudCardHeader>
                 <div>
                     <MudText Class="example-card-text" Typo="Typo.h6" Color="Color.Inherit">@Title</MudText>
@@ -20,30 +20,33 @@
 }
 else
 {
-    <MudCard Class="component-card mx-sm-2 my-8 pa-sm-2 example-card" Style="cursor: default" Elevation="4">
+    <MudCard Class="component-card mx-sm-2 my-8 pa-sm-2" Style="cursor: default" Elevation="4">
         <MudCardHeader>
             <div>
                 <MudText Class="example-card-text" Typo="Typo.h6" Color="Color.Inherit">@Title</MudText>
                 <MudText Class="example-card-text" Typo="Typo.body2" Color="Color.Inherit">@Description</MudText>
+                <MudDivider />
             </div>
         </MudCardHeader>
         <MudCardContent>
             <div class="pa-2" style="background: var(--mud-palette-background);">
                 @ChildContent
-                <MudDivider Class="mud-width-full mt-8" />
-                <MudExpansionPanel Text="Code">
-                    <div style="overflow-x: scroll">
-                        @foreach (string line in _lines)
-                        {
-                            if (string.IsNullOrEmpty(line) || line == "/r")
+                @if (ShowCodeSection)
+                {
+                    <MudDivider Class="mud-width-full mt-8" />
+                    <MudExpansionPanel Text="Code">
+                        <div style="overflow-x: scroll">
+                            @foreach (string line in _lines)
                             {
-                                <br />
+                                if (string.IsNullOrEmpty(line) || line == "/r")
+                                {
+                                    <br />
+                                }
+                                <pre style="color: var(--mud-palette-text); font-weight: 500; font-size: 14px;">@line</pre>
                             }
-                            <pre style="color: var(--mud-palette-primary); font-weight: 500; font-size: 14px;">@line</pre>
-                        }
-                    </div>
-                </MudExpansionPanel>
-
+                        </div>
+                    </MudExpansionPanel>
+                }
             </div>
         </MudCardContent>
     </MudCard>
@@ -65,6 +68,9 @@ else
     [Parameter]
     public bool HasExpansionPanel { get; set; }
 
+    [Parameter]
+    public bool ShowCodeSection { get; set; } = true;
+
     List<string> _lines = new();
 
     protected override void OnParametersSet()
@@ -76,39 +82,25 @@ else
 
         string path = $@"ComponentViewer.Docs.Pages.Examples.{ExampleName}.razor";
         var resourceStream = ass.GetManifestResourceStream(path);
-        using var reader = new StreamReader(resourceStream);
-
-        while (true)
+        if (resourceStream != null)
         {
-            var line = reader.ReadLine();
-            if (line != null)
-                _lines.Add(line);
-            else
-                break;
+            using var reader = new StreamReader(resourceStream);
+
+            while (true)
+            {
+                var line = reader.ReadLine();
+                if (line != null)
+                    _lines.Add(line);
+                else
+                    break;
+            }
         }
     }
 }
 
 <style>
-    .example-card {
-        background-color: transparent;
-        /*color: var(--mud-palette-secondary);*/
-        transition: background-color .6s;
+    .example-card-text {
+        color: var(--mud-palette-secondary);
         transition: color 1s;
-        cursor: pointer;
     }
-
-        .example-card:hover {
-            /*color: white;*/
-            background: linear-gradient(to right, var(--mud-palette-primary), var(--mud-palette-secondary));
-        }
-
-        .example-card .example-card-text {
-            color: var(--mud-palette-secondary);
-            transition: color 1s;
-        }
-
-        .example-card:hover .example-card-text {
-            color: white;
-        }
 </style>

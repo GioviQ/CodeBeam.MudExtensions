@@ -2,16 +2,19 @@
 #### Useful third party extension components for MudBlazor, from the community contributors.
 ##### `TheMudSecondary`
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/codebeamorg/codebeam.mudextensions?color=594ae2&style=flat-square&logo=github)](https://github.com/codebeamorg/codebeam.mudextensions/stargazers)
-[![GitHub last commit](https://img.shields.io/github/last-commit/codebeamorg/codebeam.mudextensions?color=594ae2&style=flat-square&logo=github)](https://github.com/codebeamorg/codebeam.mudextensions)
-[![Contributors](https://img.shields.io/github/contributors/codebeamorg/codebeam.mudextensions?color=594ae2&style=flat-square&logo=github)](https://github.com/codebeamorg/codebeam.mudextensions/graphs/contributors)
-[![Nuget version](https://img.shields.io/nuget/v/CodeBeam.mudextensions?color=ff4081&label=nuget%20version&logo=nuget&style=flat-square)](https://www.nuget.org/packages/codebeam.mudextensions/)
-[![Nuget downloads](https://img.shields.io/nuget/dt/CodeBeam.mudextensions?color=ff4081&label=nuget%20downloads&logo=nuget&style=flat-square)](https://www.nuget.org/packages/codebeam.mudextensions/)
+[![GitHub Repo stars](https://img.shields.io/github/stars/codebeamorg/codebeam.mudblazor.extensions?color=594ae2&style=flat-square&logo=github)](https://github.com/codebeamorg/codebeam.mudblazor.extensions/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/codebeamorg/codebeam.mudblazor.extensions?color=594ae2&style=flat-square&logo=github)](https://github.com/codebeamorg/codebeam.mudblazor.extensions)
+[![Contributors](https://img.shields.io/github/contributors/codebeamorg/codebeam.mudblazor.extensions?color=594ae2&style=flat-square&logo=github)](https://github.com/codebeamorg/codebeam.mudblazor.extensions/graphs/contributors)
+[![Nuget version](https://img.shields.io/nuget/v/CodeBeam.mudblazor.extensions?color=ff4081&label=nuget%20version&logo=nuget&style=flat-square)](https://www.nuget.org/packages/CodeBeam.MudBlazor.Extensions)
+[![Nuget downloads](https://img.shields.io/nuget/dt/CodeBeam.mudblazor.extensions?color=ff4081&label=nuget%20downloads&logo=nuget&style=flat-square)](https://www.nuget.org/packages/CodeBeam.MudBlazor.Extensions)
 
 ## Components
 
 - MudAnimate
+- MudChipField
+- MudCodeInput
 - MudColorProvider
+- MudCsvMapper
 - MudDateWheelPicker
 - MudFontPicker
 - MudGallery
@@ -28,27 +31,61 @@
 - MudStepper
 - MudSwitchM3
 - MudToggle
+- MudTransferList
 - MudWatch
 - MudWheel
 
-## Installation
-This extension uses MudBlazor features (need to set up MudBlazor if you didn't before), so only need to add this line described below:<br /><br />
-Add the following to your HTML head section, it's either `index.html` or `_Layout.cshtml`/`_Host.cshtml` depending on whether you're running Server-Side or WASM.
-```
-<link href="_content/CodeBeam.MudExtensions/MudExtensions.min.css" rel="stylesheet" />
-```
+## Extended Components
 
-Adding namespace to `_Imports.razor` is not obligatory, but may be useful.
-```
-@using MudExtensions
-@using MudExtensions.Enums
-```
+- MudListExtended
+- MudSelectExtended
+- MudTextFieldExtended
+
 
 ## Playground
+- **Docs**
 https://codebeam-mudextensions.pages.dev/
+- **Try MudExtensions**
+https://trymudextensions.pages.dev/
+
+## Breaking Changes
+Look at the [Breaking Changes](https://github.com/CodeBeamOrg/CodeBeam.MudBlazor.Extensions/blob/dev/BreakingChanges.md)
 
 ## API
 https://codebeam-mudextensions.pages.dev/api
+
+## Supported MudBlazor Versions
+| MudExtensions | MudBlazor | .Net |
+| :---  |    :----:   | :---: |
+| 6.0.0 - 6.0.3 | 6.0.16 | .Net 6 |
+| 6.0.4 - 6.0.12 | 6.0.17 - 6.0.18 | .Net 6 |
+| 6.1.0 - 6.1.4 | 6.1.0 - 6.1.2 | .Net 6 & .Net 7 |
+| 6.1.5 - 6.1.9 | 6.1.4 - 6.1.7 | .Net 6 & .Net 7 |
+| 6.2.0 - 6.2.5 | 6.1.8 | .Net 6 & .Net 7 |
+| 6.2.6 - 6.4.5 | 6.1.9 - 6.2.0 | .Net 6 & .Net 7 |
+
+## Installation
+This extension uses MudBlazor features (need to set up MudBlazor if you didn't before), so only need to add this line described below:<br /><br />
+Add the following to your HTML **head** section, it's either `index.html` or `_Layout.cshtml`/`_Host.cshtml` depending on whether you're running Server-Side or WASM.
+```html
+<link href="_content/CodeBeam.MudBlazor.Extensions/MudExtensions.min.css" rel="stylesheet" />
+```
+
+Add the following to your HTML **body** section
+```html
+<script src="_content/CodeBeam.MudBlazor.Extensions/MudExtensions.min.js"></script>
+```
+
+Add the extension services into program.cs
+```razor
+using MudExtensions.Services;
+builder.Services.AddMudExtensions();
+```
+
+Adding namespace to `_Imports.razor` is not obligatory, but useful.
+```razor
+@using MudExtensions
+```
 
 ## Examples
 Each example is recorded in the playground website.
@@ -56,6 +93,10 @@ Each example is recorded in the playground website.
 ### MudAnimate
 
 https://user-images.githubusercontent.com/78308169/194701300-e4ad517a-8fbb-4a5e-9407-a5a585157685.mp4
+
+### MudCodeInput
+
+https://user-images.githubusercontent.com/78308169/213863531-fa817188-3194-4858-8642-ace98a324b32.mp4
 
 ### MudDateWheelPicker
 
@@ -92,6 +133,3 @@ https://user-images.githubusercontent.com/78308169/195979884-7cf1698c-ce0a-400f-
 
 ## Contribution
 Feel free to contribute.
-
-## Preparing
-Usage files and trick definitons for each extension component are preparing.
